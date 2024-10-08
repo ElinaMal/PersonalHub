@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,9 +11,24 @@ namespace Notes
     {
         static void Main(string[] args)
         {
+            string dog = "dog";
+
             //fucntion stuff
-            TryingStuff("Master", 27); //static fucntion can't call a non-static fucntion
-            TryingStuff("Friend", 0);
+            TryingStuff("Master", 27, 'B', "cat" == dog); //static function can't call a non-static function
+            TryingStuff("Friend", 0, 'A', true);
+
+
+
+            string adjective = Console.ReadLine();
+
+            string myAdLib = FormatIntoMadLib("dog", adjective, "walk");
+            Console.WriteLine(myAdLib);
+
+            string morning = PracticeFunctions("sun", adjective, "rise");
+            Console.WriteLine(morning);
+
+            System.Threading.Thread.Sleep(3000); //makes the console wait the inputted time, "3000" = 3 seconds
+
 
 
 
@@ -99,6 +115,116 @@ namespace Notes
             } //will play in case the code crashed
 
 
+
+
+
+            //Operators: the operations you are doing
+            //Operands: what you are doing the operations on
+
+            // 1 + 1,  "1" = operands and "+" = operator
+
+            //Arithmetic operators: operators that act on numeric types( ints, floats, doubles)
+            // +, -, *, /
+            // +=, -=, *=, /=
+            // ++, --
+
+            int a = 15;
+            int b = 2;
+            int c = a + b;
+            int d = a / b; //will give 7 as the answer due to it being an int, so no decimals
+            float f = (float)a / b; //float f still won't give you a float unless at least one of the used values is changed to a float, like in this example
+
+            Console.WriteLine(c);
+            Console.WriteLine(d);
+            Console.WriteLine(f);
+
+            a += 7; //same as d = d + 7, just shorter
+
+            int t = a + b;
+            Console.WriteLine(t);
+
+            b += c;
+            Console.WriteLine(b);
+
+            b++; //will make the number go up by one
+            Console.WriteLine(b);
+
+
+
+            //Comparison operators: checking two values and comparing them
+            // <, >
+            // <=, >=
+            // !=, ==
+
+            int myNum = 4;
+            int yourNum = 6;
+
+            bool isMyNumLarger = myNum < yourNum; //compares the numbers and check whether the statement is true
+            Console.WriteLine(isMyNumLarger); //says whether it's true or not
+
+            bool areNumsUnequal = myNum != yourNum; //checks if numbers are unequal, if yes sets bool to true
+            Console.WriteLine(areNumsUnequal);
+
+            bool areNumsEqual = myNum == yourNum; // checks if the numbers are equal, if yes sets to true
+            Console.WriteLine(areNumsEqual);
+
+
+
+            //Boolean logic operators: take two bools and give you a bool
+            // &&, ||, !
+
+            bool dogVoltBest = true;
+            bool dayBad = false;
+            bool dayGood = true;
+            bool dogMikeBest = false;
+            bool dayNeutral = true;
+
+            bool areAllDogsBest = dogMikeBest && dogVoltBest; // && requires for both statements to be true to be set to true
+            Console.WriteLine(areAllDogsBest);
+
+            bool isDayGood = dayGood || dayBad; // || is an "or" statements so it requires only one to be true
+            Console.WriteLine(isDayGood);
+
+            bool isDayOk = (dayGood || dayBad) && dayNeutral; //first two get checked first and later go as a collective true or false
+            bool isDayOkNow = dayGood || (dayBad && dayNeutral); //stuff in parenthesis gets evaluated first
+
+            bool isDayNeutral = !dayNeutral; // ! flips the bool in front of it, so ! is like putting - in front of number or equation in math
+
+
+
+            // Code branching
+            bool userPressedSpacebar = Console.ReadKey().KeyChar.CompareTo(' ') == 0;
+
+            if (!userPressedSpacebar) //remember that ! flips whatever is in the variable, so in this case if bool is true initially it'll become false and won't play
+            {
+                Console.WriteLine("Good Job!");
+            }
+
+
+
+            char letter = Console.ReadKey().KeyChar;
+
+            switch (letter) //in switches you cannot put in a variable, you must put a concrete constant input
+            {
+                case 'a':
+                    Console.WriteLine("yay"); //will execute when the character input is 'a'
+                    break; //cuts off at the case without letting fall through to the next one. If break is in place then afte the case
+                           //is executed the next code that runs will be outside of the switch
+
+                case 'c':
+                    Console.WriteLine("not yay");
+                    break;
+
+                default:
+                    Console.WriteLine("huh, yeah I guess, '" + letter + "' works"); //plays this when none of the previous are true, so like an "else"
+                    break;
+            }
+
+
+
+
+
+
             Console.ReadKey(); //will wait until a key is pressed before doing anything after it
         }
 
@@ -106,7 +232,7 @@ namespace Notes
         //function notes
         // what function returns, name of function(inputs)
         //void fucntion returns nothing and you don't need anything from it
-        static void TryingStuff(string names, int numberOfKills)
+        static void TryingStuff(string names, int numberOfKills, char letter, bool catEqualToDog)
         {
             Console.WriteLine("Hallo " + names);
             Console.WriteLine(numberOfKills + " that's what should have been the number");
@@ -115,10 +241,36 @@ namespace Notes
             {
                 Console.WriteLine("yes, my Master");
             }
+            else if (letter == 'A')
+            {
+                Console.WriteLine("Hallo!");
+            }
             else 
             { 
                 Console.WriteLine("what?");
             }
+        }
+
+        static string FormatIntoMadLib(string noun, string adjective, string verb)
+        {
+            return noun + " " + verb + "ed in the garder made up of " + adjective + " flowers"; //the return simply makes this line the output of the function,
+                                                                                                //so you can store it into a variable later and actively use it
+        }
+
+        static string PracticeFunctions(string noun, string adjective, string verb)
+        {
+            return "morning" + noun + " " + verb + "es upon the earliest signs of the " + adjective + " warmth";
+        }
+
+        static int Number(string word)
+        {
+            // this code will take in values of string and then output value of int, like you can input a word
+            // and then function will determine the length of the word and give you the number
+        }
+
+        static int getDamage(int attack, int defense) //will find the damage taken by the player depending on their defense and the attack
+        {
+            return attack - defense;
         }
     }
 }
