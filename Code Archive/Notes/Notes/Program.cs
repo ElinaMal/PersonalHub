@@ -7,8 +7,77 @@ using System.Threading.Tasks;
 
 namespace Notes
 {
+    //struct notes
+
+    struct PlayerData  //with struct you can easily add new variables and then apply them to the "groups" and change all of them at once.
+                       //You can also put structs into structs
+    {
+        public Example example;
+        public int health;
+        public float mana;
+        public Stats anotherExample;
+        public bool isPlayerAlive;
+        public string playerName;
+        public DateTime lastTimeEdited;
+    }
+
+    struct Example
+    {
+        public int number;
+    }
+
+    struct Stats
+    {
+        public int anotherExample;
+    }
+
+
     internal class Notes
     {
+        //struct notes
+        static void Second(string[] args)
+        {
+            Example examplePlayer1 = new()
+            {
+                number = 5
+            };
+
+            PlayerData player1 = new()
+            {
+                health = 100,
+                mana = 30.5f,
+                anotherExample = new()
+                {
+                    anotherExample = 4      //this is another way to do it, instead of creating a whole new layer like the "Example" above
+                },
+                isPlayerAlive = true,
+                playerName = "Marcus",
+                lastTimeEdited = DateTime.Now,
+                example = examplePlayer1
+            };
+
+            Console.WriteLine(player1.example.number); //now you can write stuff from Example struct through player1
+            Console.WriteLine(player1.health);
+
+            PlayerData player2 = new()
+            {
+                health = 400,
+                mana = 12.5f,
+                isPlayerAlive = true,
+                playerName = "Mira",
+                lastTimeEdited = DateTime.Now
+            };
+
+            PrintPlayerName(player2);
+        }
+
+        static void PrintPlayerName(PlayerData player)
+        {
+            Console.WriteLine(player.playerName);
+            Console.WriteLine(player.example.number);
+        }
+
+        
         static void Main(string[] args)
         {
             string dog = "dog";
@@ -220,11 +289,6 @@ namespace Notes
                     break;
             }
 
-
-
-
-
-
             Console.ReadKey(); //will wait until a key is pressed before doing anything after it
         }
 
@@ -262,11 +326,13 @@ namespace Notes
             return "morning" + noun + " " + verb + "es upon the earliest signs of the " + adjective + " warmth";
         }
 
+        /*
         static int Number(string word)
         {
             // this code will take in values of string and then output value of int, like you can input a word
             // and then function will determine the length of the word and give you the number
         }
+        */
 
         static int getDamage(int attack, int defense) //will find the damage taken by the player depending on their defense and the attack
         {
