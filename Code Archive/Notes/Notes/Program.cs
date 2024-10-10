@@ -15,7 +15,7 @@ namespace Notes
         public Example example;
         public int health;
         public float mana;
-        public Stats anotherExample;
+        public Stats stats;
         public bool isPlayerAlive;
         public string playerName;
         public DateTime lastTimeEdited;
@@ -46,7 +46,7 @@ namespace Notes
             {
                 health = 100,
                 mana = 30.5f,
-                anotherExample = new()
+                stats = new()
                 {
                     anotherExample = 4      //this is another way to do it, instead of creating a whole new layer like the "Example" above
                 },
